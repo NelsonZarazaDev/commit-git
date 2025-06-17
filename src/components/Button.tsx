@@ -22,7 +22,7 @@ export default function Button({
     toast.current?.show({
       severity: "success",
       summary: "Copy",
-      detail: "Message copied with output",
+      detail: "Message copied successfully",
       life: 3000,
     });
   };
