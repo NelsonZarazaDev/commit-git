@@ -18,6 +18,7 @@ export default function FooterOptions({ value, onChange }: props) {
       className="text-blue-700"
         id="footer"
         name="footer"
+        autoComplete="off"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         tooltip="Descripción de porque el cambio rompe compatibilidad (ej. elimina un endpoint, cambia un método), se debe avisar."

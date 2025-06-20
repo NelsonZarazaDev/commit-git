@@ -14,6 +14,7 @@ export default function DescriptionInput({ value, onChange }: props) {
       <InputText
         id="description"
         name="description"
+        autoComplete="off"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         tooltip="Concisa (máximo ~72 caracteres), escrita en

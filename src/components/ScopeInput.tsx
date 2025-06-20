@@ -14,6 +14,7 @@ export default function ScopeInput({ value, onChange }: props) {
       <InputText
         id="scope"
         name="scope"
+        autoComplete="off"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         tooltip="Qué parte del código tocaste (Módulo, carpeta,

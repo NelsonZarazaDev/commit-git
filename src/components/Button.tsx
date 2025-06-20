@@ -31,9 +31,7 @@ export default function Button({
     try {
       await navigator.clipboard.writeText(value);
       showSuccess();
-      console.log("Texto copiado al portapapeles");
     } catch (err) {
-      console.error("Error al copiar el texto: ", err);
     }
   };
 
