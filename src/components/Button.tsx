@@ -30,7 +30,6 @@ export default function Button({
       severity: "success",
       summary: "Copy",
       detail: "Message copied successfully",
-      position: "bottom-right",
       life: 3000,
     });
   };

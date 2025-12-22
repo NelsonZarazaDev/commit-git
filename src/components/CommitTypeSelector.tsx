@@ -13,11 +13,10 @@ import {
 import { Button } from "primereact/button";
 
 type props = {
-  value: string;
   onChange: (value: string) => void;
 };
 
-export default function CommitTypeSelector({ value, onChange }: props) {
+export default function CommitTypeSelector({ onChange }: props) {
   const tipos = [
     {
       icon: <Sparkles />,

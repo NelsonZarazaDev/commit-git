@@ -63,7 +63,6 @@ function App() {
         <div className="lg:col-span-2">
           <div className="w-full flex flex-col gap-y-2 backdrop-blur-md bg-white/10 border border-white/30 rounded-xl shadow-lg p-6 text-white">
             <CommitTypeSelector
-              value={commitData.type}
               onChange={(value) => updateCommit("type", value)}
             />
             <div className="flex w-full gap-4">
