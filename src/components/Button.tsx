@@ -1,7 +1,7 @@
 import { Button as PrimeButton } from "primereact/button";
 import { Toast } from "primereact/toast";
-import { useRef } from "react";
-import { confirmDialog } from "primereact/confirmdialog";
+import { useRef, useState } from "react";
+import { ConfirmDialog } from "primereact/confirmdialog";
 
 type props = {
   value: string;
@@ -10,12 +10,19 @@ type props = {
   onClear?: () => void;
 };
 
+export type CommitHistoryItem = {
+  id: string;
+  message: string;
+  createdAt: number;
+};
+
 export default function Button({
   value,
   nameButton,
   functionality,
   onClear,
 }: props) {
+  const [visible, setVisible] = useState(false);
   const toast = useRef<Toast>(null);
 
   const showSuccess = () => {
@@ -23,16 +30,30 @@ export default function Button({
       severity: "success",
       summary: "Copy",
       detail: "Message copied successfully",
+      position: "bottom-right",
       life: 3000,
     });
   };
 
   const Copy = async () => {
-    try {
-      await navigator.clipboard.writeText(value);
-      showSuccess();
-    } catch (err) {
-    }
+    await navigator.clipboard.writeText(value);
+
+    const raw = localStorage.getItem("historial");
+    const history: CommitHistoryItem[] = raw ? JSON.parse(raw) : [];
+
+    const newCommit: CommitHistoryItem = {
+      id: crypto.randomUUID(),
+      message: value,
+      createdAt: Date.now(),
+    };
+
+    history.unshift(newCommit);
+
+    localStorage.setItem("historial", JSON.stringify(history));
+
+    window.dispatchEvent(new Event("storage"));
+
+    showSuccess();
   };
 
   const accept = () => {
@@ -47,25 +68,24 @@ export default function Button({
 
   const reject = () => {};
 
-  const Clear = async () => {
-    confirmDialog({
-      message: "Do you want to clean the fields?",
-      header: "Clear Confirmation",
-      icon: "pi pi-info-circle",
-      defaultFocus: "reject",
-      acceptClassName: "p-button-danger",
-      accept,
-      reject,
-    });
-  };
-
   return (
     <>
       <Toast ref={toast} />
-      <div className="flex justify-end">
+      <ConfirmDialog
+        visible={visible}
+        message="¿Estás seguro que deseas continuar?"
+        accept={accept}
+        reject={reject}
+      />
+      <div className="flex w-full">
         <PrimeButton
+          className={`w-full ${
+            functionality === "copy"
+              ? "bg-[#ac67cc]"
+              : "backdrop-blur-md bg-white/10"
+          } p-2 rounded-xl border border-gray-600 cursor-pointer font-bold`}
           label={nameButton}
-          onClick={functionality === "copy" ? Copy : Clear}
+          onClick={functionality === "copy" ? Copy : () => setVisible(true)}
         />
       </div>
     </>

@@ -1,4 +1,16 @@
-import { Dropdown } from "primereact/dropdown";
+import {
+  BookOpen,
+  Bug,
+  Package,
+  Recycle,
+  Sparkle,
+  Sparkles,
+  TestTube,
+  Undo2,
+  Wrench,
+  Zap,
+} from "lucide-react";
+import { Button } from "primereact/button";
 
 type props = {
   value: { code: string };
@@ -7,48 +19,90 @@ type props = {
 
 export default function CommitTypeSelector({ value, onChange }: props) {
   const tipos = [
-    { name: "(feat) = Nueva funcionalidad", code: "feat" },
-    { name: "(fix) = Corrección de bug", code: "fix" },
-    { name: "(docs) = Solo cambios en documentación", code: "docs" },
     {
-      name: "(style) = Formato o apariencia, sin cambiar lógica.",
+      icon: <Sparkles />,
+      color: "bg-[#30495B]/70",
+      border: "border-[#30495B]",
+      code: "feat",
+    },
+    {
+      icon: <Bug />,
+      color: "bg-[#642859]/80",
+      border: "border-[#642859]",
+      code: "fix",
+    },
+    {
+      icon: <BookOpen />,
+      color: "bg-[#314E88]/80",
+      border: "border-[#314E88]",
+      code: "docs",
+    },
+    {
+      icon: <Sparkle />,
+      color: "bg-[#613188]/80",
+      border: "border-[#613188]",
       code: "style",
     },
     {
-      name: "(refactor) = Mejoras de código sin cambiar funcionalidad",
+      icon: <Recycle />,
+      color: "bg-[#723F5F]/80",
+      border: "border-[#723F5F]",
       code: "refactor",
     },
-    { name: "(perf) = Mejora de rendimiento", code: "perf" },
-    { name: "(test) = Añadir o modificar pruebas", code: "test" },
     {
-      name: "(chore) = Cambios en tareas de mantenimiento, configuraciones o actualizaciones de dependencias",
-      code: "chore",
+      icon: <Zap />,
+      color: "bg-[#723F5F]/80",
+      border: "border-[#723F5F]",
+      code: "perf",
     },
     {
-      name: "(build) = Cambios que afectan el empaquetado o herramientas de build",
+      icon: <TestTube />,
+      color: "bg-[#3F3B7F]/80",
+      border: "border-[#3F3B7F]",
+      code: "test",
+    },
+    {
+      icon: <Package />,
+      color: "bg-[#483B69]/80",
+      border: "border-[#483B69]",
       code: "build",
     },
     {
-      name: "(ci) = Cambios en archivos de integración continua o scripts de despliegue",
+      icon: <Wrench />,
+      color: "bg-[#3C477C]/80",
+      border: "border-[#3C477C]",
       code: "ci",
+    },
+    {
+      icon: <Wrench />,
+      color: "bg-[#5D3291]/80",
+      border: "border-[#5D3291]",
+      code: "chore",
+    },
+    {
+      icon: <Undo2 />,
+      color: "bg-[#753164]/80",
+      border: "border-[#753164]",
+      code: "revert",
     },
   ];
 
   return (
-    <div className="card flex flex-col justify-content-center gap-2">
+    <div>
       <label htmlFor="Type" className="font-bold hover:text-indigo-300">
-        Type / Tipo
+        Tipo
       </label>
-      <Dropdown
-        id="type"
-        name="type"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        options={tipos}
-        optionLabel="name"
-        placeholder="Select a type"
-        className="w-full md:w-14rem"
-      />
+      <div className="grid grid-cols-6 gap-4 mt-2">
+        {tipos.map((tipo, index) => (
+          <Button
+            key={index}
+            label={tipo.code}
+            icon={tipo.icon}
+            onClick={() => onChange(tipo.code)}
+            className={`${tipo.color} border-4 ${tipo.border} flex flex-col items-center p-2 rounded-2xl cursor-pointer`}
+          />
+        ))}
+      </div>
     </div>
   );
 }

@@ -1,11 +1,8 @@
 @import "tailwindcss";
 
-@import "primereact/resources/themes/lara-light-indigo/theme.css"
-  layer(primereact);
-
 html,
 body {
-  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  background: linear-gradient(135deg, #674cb1a2 0%, #674cb1 50%, #674cb1a2 100%);
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
@@ -13,8 +10,148 @@ body {
   color: white;
 }
 
-.p-inputtext {
-  background-color: #0F0C29;
-  color: #ffffff;
-  border: 1px solid #302B63;
+/* ===============================
+   PrimeReact Toast
+   =============================== */
+
+.p-toast {
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: 1100;
+}
+
+.p-toast-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.p-toast-message {
+  background: rgba(255, 255, 255, 0.12) !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 1rem;
+  color: white;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+.p-toast-message-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+}
+
+.p-toast-image {
+  opacity: 0.85;
+  margin-top: 0.2rem;
+}
+
+.p-toast-title {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.p-toast-detail {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+/* Botón cerrar */
+.p-toast-icon-close {
+  color: white !important;
+  opacity: 0.6;
+}
+
+.p-toast-icon-close:hover {
+  opacity: 1;
+}
+
+/* Severidades (solo borde izquierdo) */
+.p-toast-message-success {
+  border-left: 4px solid #22c55e;
+}
+
+.p-toast-message-info {
+  border-left: 4px solid #3b82f6;
+}
+
+.p-toast-message-warn {
+  border-left: 4px solid #facc15;
+}
+
+.p-toast-message-error {
+  border-left: 4px solid #ef4444;
+}
+
+/* ===============================
+   PrimeReact ConfirmDialog
+   =============================== */
+
+.p-dialog-mask {
+  background: rgba(0, 0, 0, 0.55) !important;
+  backdrop-filter: blur(6px);
+}
+
+.p-confirm-dialog {
+  background: rgba(255, 255, 255, 0.12) !important;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 1.25rem;
+  color: white;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+/* Header */
+.p-dialog-header {
+  background: transparent !important;
+  border: none !important;
+  padding: 1.25rem 1.5rem 0.75rem;
+  font-weight: 600;
+}
+
+/* Content */
+.p-dialog-content {
+  background: transparent !important;
+  padding: 0 1.5rem 1.25rem;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+/* Footer */
+.p-dialog-footer {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 1.5rem 1.25rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+/* Botón Aceptar */
+.p-confirm-dialog-accept {
+  background: rgba(239, 68, 68, 0.85) !important;
+  border: none !important;
+  color: white !important;
+  border-radius: 0.75rem;
+  padding: 0.5rem 1.25rem;
+  font-weight: 600;
+}
+
+.p-confirm-dialog-accept:hover {
+  background: rgb(239, 68, 68) !important;
+}
+
+/* Botón Cancelar */
+.p-confirm-dialog-reject {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  color: white !important;
+  border-radius: 0.75rem;
+  padding: 0.5rem 1.25rem;
+  font-weight: 600;
+}
+
+.p-confirm-dialog-reject:hover {
+  background: rgba(255, 255, 255, 0.3) !important;
 }
