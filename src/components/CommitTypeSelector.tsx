@@ -13,7 +13,7 @@ import {
 import { Button } from "primereact/button";
 
 type props = {
-  value: { code: string };
+  value: string;
   onChange: (value: string) => void;
 };
 
