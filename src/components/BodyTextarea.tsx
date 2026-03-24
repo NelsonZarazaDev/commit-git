@@ -1,18 +1,20 @@
 import { InputTextarea } from "primereact/inputtextarea";
+import type { TranslationSet } from "../i18n";
 
 type props = {
   value: string;
   onChange: (value: string) => void;
+  texts: TranslationSet;
 };
 
-export default function BodyTextarea({ value, onChange }: props) {
+export default function BodyTextarea({ value, onChange, texts }: props) {
   return (
     <div className="card flex flex-col justify-content-center gap-2">
       <label
         htmlFor="Body"
         className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500"
       >
-        Cuerpo <span className="text-slate-400">(Opcional)</span>
+        {texts.body} <span className="text-slate-400">({texts.optional})</span>
       </label>
       <InputTextarea
         id="body"

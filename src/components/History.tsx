@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Button } from "primereact/button";
 import { X } from "lucide-react";
+import type { Language, TranslationSet } from "../i18n";
 
 export type CommitHistoryItem = {
   id: string;
@@ -10,7 +11,12 @@ export type CommitHistoryItem = {
 
 const PAGE_SIZE = 8;
 
-export default function History() {
+type Props = {
+  texts: TranslationSet;
+  language: Language;
+};
+
+export default function History({ texts, language }: Props) {
   const [history, setHistory] = useState<CommitHistoryItem[]>([]);
   const [page, setPage] = useState(0);
 
@@ -69,13 +75,13 @@ export default function History() {
     <div className="flex flex-col gap-y-3 rounded-[1.75rem] border border-white/60 bg-white/70 p-5 text-slate-900 shadow-[0_20px_60px_rgba(15,23,42,0.14)] backdrop-blur-xl">
       <div className="flex items-center justify-between">
         <div>
-          <div className="text-base font-bold">Historial</div>
+          <div className="text-base font-bold">{texts.historyTitle}</div>
           <div className="text-xs text-slate-500">
-            Tus ultimos commits copiados
+            {texts.historyHint}
           </div>
         </div>
         <Button
-          label="Eliminar todo"
+          label={texts.deleteAll}
           severity="danger"
           size="small"
           onClick={removeAll}
@@ -84,14 +90,14 @@ export default function History() {
       </div>
 
       <div className="rounded-2xl bg-slate-950 px-4 py-2.5 text-xs text-slate-200">
-        {history.length} commits guardados
+        {texts.savedCommits(history.length)}
       </div>
 
       <hr className="border-slate-200" />
 
       {paginated.length === 0 && (
         <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 px-4 py-6 text-center text-sm text-slate-500">
-          Aun no hay commits en el historial.
+          {texts.emptyHistory}
         </div>
       )}
 
@@ -106,7 +112,9 @@ export default function History() {
               {item.message}
             </span>
             <span className="text-xs text-slate-400">
-              {new Date(item.createdAt).toLocaleString()}
+              {new Date(item.createdAt).toLocaleString(
+                language === "es" ? "es-CO" : "en-US",
+              )}
             </span>
           </div>
 
@@ -127,14 +135,14 @@ export default function History() {
 
       <div className="flex justify-between pt-2">
         <Button
-          label="Anterior"
+          label={texts.previous}
           size="small"
           className="cursor-pointer rounded-xl border border-slate-200 bg-slate-50 px-3 py-2"
           disabled={page === 0}
           onClick={() => setPage((p) => p - 1)}
         />
         <Button
-          label="Siguiente"
+          label={texts.next}
           size="small"
           className="cursor-pointer rounded-xl border border-slate-200 bg-slate-50 px-3 py-2"
           disabled={(page + 1) * PAGE_SIZE >= history.length}

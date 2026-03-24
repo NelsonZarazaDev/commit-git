@@ -2,12 +2,14 @@ import { Button as PrimeButton } from "primereact/button";
 import { Toast } from "primereact/toast";
 import { useRef, useState } from "react";
 import { ConfirmDialog } from "primereact/confirmdialog";
+import type { TranslationSet } from "../i18n";
 
 type props = {
   value: string;
   nameButton: string;
   functionality: string;
   onClear?: () => void;
+  texts: TranslationSet;
 };
 
 export type CommitHistoryItem = {
@@ -21,6 +23,7 @@ export default function Button({
   nameButton,
   functionality,
   onClear,
+  texts,
 }: props) {
   const [visible, setVisible] = useState(false);
   const toast = useRef<Toast>(null);
@@ -28,8 +31,8 @@ export default function Button({
   const showSuccess = () => {
     toast.current?.show({
       severity: "success",
-      summary: "Copy",
-      detail: "Message copied successfully",
+      summary: texts.copyToastSummary,
+      detail: texts.copyToastDetail,
       life: 3000,
     });
   };
@@ -58,8 +61,8 @@ export default function Button({
   const accept = () => {
     toast.current?.show({
       severity: "success",
-      summary: "Confirmed",
-      detail: "The fields were successfully cleared",
+      summary: texts.clearToastSummary,
+      detail: texts.clearToastDetail,
       life: 3000,
     });
     onClear?.();
@@ -72,7 +75,7 @@ export default function Button({
       <Toast ref={toast} />
       <ConfirmDialog
         visible={visible}
-        message="Estas seguro de que deseas continuar?"
+        message={texts.confirmClear}
         accept={accept}
         reject={reject}
       />

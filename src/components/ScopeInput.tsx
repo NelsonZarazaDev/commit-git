@@ -1,18 +1,20 @@
 import { InputText } from "primereact/inputtext";
+import type { TranslationSet } from "../i18n";
 
 type props = {
   value: string;
   onChange: (value: string) => void;
+  texts: TranslationSet;
 };
 
-export default function ScopeInput({ value, onChange }: props) {
+export default function ScopeInput({ value, onChange, texts }: props) {
   return (
     <div className="flex w-full flex-col justify-content-center gap-2">
       <label
         htmlFor="Scope"
         className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500"
       >
-        Alcance <span className="text-slate-400">(Opcional)</span>
+        {texts.scope} <span className="text-slate-400">({texts.optional})</span>
       </label>
       <InputText
         id="scope"
@@ -21,7 +23,7 @@ export default function ScopeInput({ value, onChange }: props) {
         autoComplete="off"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        placeholder="ej: auth, ui"
+        placeholder={texts.scopePlaceholder}
         tooltipOptions={{ position: "top" }}
       />
     </div>
