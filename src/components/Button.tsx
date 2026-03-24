@@ -72,7 +72,7 @@ export default function Button({
       <Toast ref={toast} />
       <ConfirmDialog
         visible={visible}
-        message="¿Estás seguro que deseas continuar?"
+        message="Estas seguro de que deseas continuar?"
         accept={accept}
         reject={reject}
       />
@@ -80,9 +80,9 @@ export default function Button({
         <PrimeButton
           className={`w-full ${
             functionality === "copy"
-              ? "bg-[#ac67cc]"
-              : "backdrop-blur-md bg-white/10"
-          } p-2 rounded-xl border border-gray-600 cursor-pointer font-bold`}
+              ? "border-emerald-400/40 bg-emerald-400 text-slate-950 hover:bg-emerald-300"
+              : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+          } cursor-pointer rounded-[1.25rem] border px-4 py-3 font-semibold shadow-lg shadow-slate-950/10 transition`}
           label={nameButton}
           onClick={functionality === "copy" ? Copy : () => setVisible(true)}
         />

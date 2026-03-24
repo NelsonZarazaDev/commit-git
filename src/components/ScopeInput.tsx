@@ -7,14 +7,17 @@ type props = {
 
 export default function ScopeInput({ value, onChange }: props) {
   return (
-    <div className="w-full flex flex-col justify-content-center gap-2">
-      <label htmlFor="Scope" className="font-bold hover:text-indigo-300">
-        Alcance <span className="text-[#401372cc]">(Opcional)</span>
+    <div className="flex w-full flex-col justify-content-center gap-2">
+      <label
+        htmlFor="Scope"
+        className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500"
+      >
+        Alcance <span className="text-slate-400">(Opcional)</span>
       </label>
       <InputText
         id="scope"
         name="scope"
-        className="w-full text-xl text-white px-6 py-4 bg-[#553D76]/40 placeholder:text-[#9F80C2] placeholder:text-xl placeholder:italic border border-gray-400 rounded-xl"
+        className="w-full rounded-[1.1rem] border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm outline-none transition placeholder:text-slate-400 focus:border-sky-400 focus:ring-4 focus:ring-sky-100"
         autoComplete="off"
         value={value}
         onChange={(e) => onChange(e.target.value)}

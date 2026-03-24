@@ -66,35 +66,46 @@ export default function History() {
   }, [history, page]);
 
   return (
-    <div className="flex flex-col gap-y-3 backdrop-blur-md bg-white/10 border border-white/30 rounded-xl shadow-lg p-6 text-white">
-      <div className="flex justify-between items-center">
-        <div className="font-bold">Historial</div>
+    <div className="flex flex-col gap-y-3 rounded-[1.75rem] border border-white/60 bg-white/70 p-5 text-slate-900 shadow-[0_20px_60px_rgba(15,23,42,0.14)] backdrop-blur-xl">
+      <div className="flex items-center justify-between">
+        <div>
+          <div className="text-base font-bold">Historial</div>
+          <div className="text-xs text-slate-500">
+            Tus ultimos commits copiados
+          </div>
+        </div>
         <Button
           label="Eliminar todo"
           severity="danger"
           size="small"
           onClick={removeAll}
-          className="backdrop-blur-md bg-white/10 p-2 rounded-xl cursor-pointer"
+          className="cursor-pointer rounded-xl border border-rose-200 bg-rose-50 px-3 py-2 text-rose-600"
         />
       </div>
 
-      <div className="text-sm opacity-80">{history.length} commits</div>
+      <div className="rounded-2xl bg-slate-950 px-4 py-2.5 text-xs text-slate-200">
+        {history.length} commits guardados
+      </div>
 
-      <hr className="border-white/20" />
+      <hr className="border-slate-200" />
 
       {paginated.length === 0 && (
-        <div className="opacity-60 text-sm">Sin commits</div>
+        <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 px-4 py-6 text-center text-sm text-slate-500">
+          Aun no hay commits en el historial.
+        </div>
       )}
 
       {paginated.map((item) => (
         <div
           key={item.id}
           onClick={() => copyCommit(item.message)}
-          className="flex justify-between items-center bg-white/5 rounded-lg p-3 cursor-pointer hover:bg-white/10 transition"
+          className="flex cursor-pointer items-center justify-between rounded-[1.25rem] border border-slate-200 bg-white p-3 transition hover:-translate-y-0.5 hover:border-emerald-200 hover:shadow-lg"
         >
-          <div className="flex flex-col max-w-[70%]">
-            <span className="text-sm font-mono truncate">{item.message}</span>
-            <span className="text-xs opacity-60">
+          <div className="flex max-w-[70%] flex-col">
+            <span className="truncate font-mono text-[13px] text-slate-800">
+              {item.message}
+            </span>
+            <span className="text-xs text-slate-400">
               {new Date(item.createdAt).toLocaleString()}
             </span>
           </div>
@@ -118,14 +129,14 @@ export default function History() {
         <Button
           label="Anterior"
           size="small"
-          className="backdrop-blur-md bg-white/10 p-2 rounded-xl cursor-pointer"
+          className="cursor-pointer rounded-xl border border-slate-200 bg-slate-50 px-3 py-2"
           disabled={page === 0}
           onClick={() => setPage((p) => p - 1)}
         />
         <Button
           label="Siguiente"
           size="small"
-          className="backdrop-blur-md bg-white/10 p-2 rounded-xl cursor-pointer"
+          className="cursor-pointer rounded-xl border border-slate-200 bg-slate-50 px-3 py-2"
           disabled={(page + 1) * PAGE_SIZE >= history.length}
           onClick={() => setPage((p) => p + 1)}
         />
