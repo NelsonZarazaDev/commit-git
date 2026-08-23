@@ -12,7 +12,7 @@ export default function DescriptionInput({ value, onChange, texts }: props) {
     <div className="flex w-full flex-col justify-content-center gap-2">
       <label
         htmlFor="Description"
-        className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500"
+        className="field-label"
       >
         {texts.description} <span className="text-rose-400">*</span>
       </label>
@@ -20,7 +20,7 @@ export default function DescriptionInput({ value, onChange, texts }: props) {
         id="description"
         name="description"
         autoComplete="off"
-        className="w-full rounded-[1.1rem] border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm outline-none transition placeholder:text-slate-400 focus:border-emerald-400 focus:ring-4 focus:ring-emerald-100"
+        className="premium-input"
         placeholder={texts.descriptionPlaceholder}
         value={value}
         onChange={(e) => onChange(e.target.value)}
